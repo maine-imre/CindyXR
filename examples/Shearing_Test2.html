@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Shearing Triangle DEMO</title>
+<meta charset="UTF-8">
+<script type="text/javascript" src="build/js/Cindy.js"></script>
+<script type="text/javascript" src="build/js/Cindy3D.js"></script>
+<script type="text/javascript" src="build/js/CindyXR.js"></script>
+<script id="csinit" type="text/x-cindyscript">
+	use("Cindy3D");
+	use("CindyXR");
+    initxrcindy3d(referencemode->"unbounded");
+
+	resetclock();
+
+    xrrenderfunction() := (
+    
+    //animate moving at 1 meter per second.
+    //something strange is happening here.
+   	t=seconds();
+	moveto(element("c"),[t,0,1]);
+    
+		begin3d();
+		//set bg color
+			background3d([1,1,1]); 
+		
+		//render geometry	
+			draw3d(a.homog, size-> .3, color->[1,0,0]); //point A
+			draw3d(b.homog, size-> .3, color->[0,1,0]); //point B
+			draw3d(c.homog, size-> .3, color->[0,0,1]); //point C
+			draw3d(a.homog,b.homog, size-> .1, color->[.7,.7,.7]); //segment AB
+			draw3d(a.homog,c.homog, size-> .1, color->[.7,.7,.7]); //segment AC
+			draw3d(b.homog,c.homog, size-> .1, color->[.7,.7,.7]); //segment BC
+			draw3d(a.homog+(a.homog-b.homog)*100,a.homog+(b.homog-a.homog)*100,size->.05,color->[.7,.7,.7]); //line through ab
+			draw3d([0,0,1]+(a.homog-b.homog)*100,[0,0,1]+(b.homog-a.homog)*100,size->.05,color->[.7,.7,.7]); // line parallel to ab through c
+			fillpoly3d([a.homog,b.homog,c.homog], color->[.9,.9,.9]); //triangle abc
+		end3d();
+    );
+    xr(xrrenderfunction());
+</script>
+
+
+<script type="text/javascript">
+    var gslp =[
+            {name: "a", type: "Free", pos: [1,0,0]},
+            {name: "b", type: "Free", pos: [0,0,0]},
+            {name: "c", type: "Free", pos: [0,0,1]},
+            //{name: "d", type: "Segment", args:["a","b"]},
+            //{name: "e", type: "Segment", args:["b","c"]},
+            //{name: "f", type: "Segment", args: ["a","c"]},     
+        ];
+   cdy = CindyJS({canvasname:"CSCanvas",scripts:"cs*",  geometry:gslp});
+</script>
+
+</head>
+
+<body>
+    <canvas id="Cindy3D" style="border: none;" width="1000" height="1000"></canvas>
+    <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+</body>
+
+</html>

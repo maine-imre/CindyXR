@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Shearing Triangle DEMO</title>
+<meta charset="UTF-8">
+<script type="text/javascript" src="build/js/Cindy.js"></script>
+<script type="text/javascript" src="build/js/Cindy3D.js"></script>
+<script type="text/javascript" src="build/js/CindyXR.js"></script>
+<script id="csinit" type="text/x-cindyscript">
+
+    initxrcindy3d(referencemode->"unbounded");
+    
+    //edit this variable to change how much t is sheared.
+	resetclock();
+
+
+    xrrenderfunction() := (
+		begin3d();
+        size3d(.1);
+		t=seconds();
+
+		//set bg color
+			background3d([.9,.9,.9]);
+			
+		//store point values as vectors
+		//note that this should eventually be switched over to cindy3d geometry
+			a=[1,0,0];
+			b=[0,0,0];
+			c=[.5,.5,1]+(a-b)*(t);
+
+
+		//draw parallel lines
+			draw3d((a-b)*100+a,(a-b)*(-100)+a,size->.1, color->[.7,.7,.7]); //line through ab
+			draw3d((a-b)*100+c,(a-b)*(-100)+c,size->.1, color->[.7,.7,.7]); //line through c parallel to ab
+
+		//draw line segments ab, bc, ac
+			draw3d(a,b, color->[0,0,0]);
+			draw3d(b,c, color->[0,0,0]);
+			draw3d(a,c, color->[0,0,0]);
+
+		//draw points abc
+			draw3d(a, size->.3, color->[1,0,0]);
+			draw3d(b, size->.3, color->[0,1,0]);
+			draw3d(c, size->.3, color->[0,0,1]);
+			draw3d(c, size->.3, color->[0,0,1]);
+
+
+		//draw triangle abc
+			fillpoly3d([a,b,c], color->[.9,.9,.9]);
+		end3d();
+    );
+    xr(xrrenderfunction());
+</script>
+
+<script type="text/javascript">
+    var cdy = CindyJS({
+        scripts: "cs*",
+        angleUnit: "°",
+        exclusive: "true",
+        geometry: [
+            {alpha: 0, color: [1, 0, 0], labeled: false, name: "A", pinned: true, type: "Free", pos: [-5,-2.8,1]},
+            {alpha: 0, color: [1, 0, 0], labeled: false, name: "B", pinned: true, type: "Free", pos: [5,-2.8,1]}
+        ],
+        ports: [
+            {id: "CSCanvas", background: "rgb(200,176,192)"}
+        ],
+        csconsole: false,
+        use: [
+            "Cindy3D", "CindyXR"
+        ],
+        autoplay: false,
+        behavior: []
+    });
+</script>
+</head>
+
+<body>
+    <canvas id="Cindy3D" style="border: none;" width="1000" height="500"></canvas>
+    <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+</body>
+
+</html>
