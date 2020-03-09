@@ -20,16 +20,7 @@
         inputsource = xrControllers_1;
         //reads the position in homogeneous coordinates
         //homogeneous coordinates end in 1 if tracked, zero if not tracked
-
-
-        isbuttonpressed = inputsource.gamepad.buttons_1.pressed;
-
-        //read pressed buttons
-        buttons = inputsource.gamepad.buttons;
-        err(buttons);
-
-        //if(isbuttonpressed,
-        position = inputsource.gripSpaceTransform.position;//);
+        position = inputsource.gripSpaceTransform.position;
 
         size3d(.1);
 
@@ -40,10 +31,12 @@
 		//note that this should eventually be switched over to cindy3d geometry
 			a=[1,0,0,1];
 			b=[0,0,0,1];
+			cDefault = [0,1,0,1];
+			if(take(position,4) == 0, position = cDefault);
 
-			//project position onto a line parallel to a and b
-			//c=[.5,.5,1,1]+(a-b)*(t);
-			c = position;
+            //c uses a projection of the controller's last good position onto the line ab;
+			abHat = (a-b)/|a-b|;
+			c = ((position-cDefault)*abHat)*abHat + cDefault;
 
 
 		//draw parallel lines
