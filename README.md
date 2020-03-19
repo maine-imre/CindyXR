@@ -22,4 +22,4 @@ We use git and git-submodule
 * The webpage should load and connect to the HMD
 
 ## Examples
-[LatticeLand](examples/LatticeLand.html)
+[LatticeLand](https://maine-imre.github.io/CindyXR-Interactions/master/examples/LatticeLand.html)
