@@ -22,7 +22,7 @@ We use git and git-submodule
 * The webpage should load and connect to the HMD
 
 ## Examples
-[LatticeLand](https://maine-imre.github.io/CindyXR-Interactions/master/examples/LatticeLand.html)
-[Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/master/examples/Shearing_Pyramid.html)
-[Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/master/examples/Shearing_Triangle.html)
-[Sphere Cross Section](https://maine-imre.github.io/CindyXR-Interactions/master/examples/SphereCrossSection.html)
+* [LatticeLand](https://maine-imre.github.io/CindyXR-Interactions/master/examples/LatticeLand.html)
+* [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/master/examples/Shearing_Pyramid.html)
+* [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/master/examples/Shearing_Triangle.html)
+* [Sphere Cross Section](https://maine-imre.github.io/CindyXR-Interactions/master/examples/SphereCrossSection.html)
