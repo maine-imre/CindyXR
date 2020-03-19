@@ -20,3 +20,6 @@ We use git and git-submodule
 * Using a recent version of Firefox, open an html from the examples folder
 * Allow VR in Firefox
 * The webpage should load and connect to the HMD
+
+## Examples
+[LatticeLand](../examples/LatticeLand.html)
