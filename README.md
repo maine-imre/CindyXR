@@ -13,6 +13,11 @@ This repository will be the source code for the IMRE Lab's CindyJS website that 
 * Allow VR in Firefox
 * The webpage should load and connect to the HMD
 
+
+### Accessing Examples with Google Cardboard
+
+STUB
+
 ## Getting Started
 ### For Development of new Scenes
 
