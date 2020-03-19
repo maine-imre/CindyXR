@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>LatticeLand</title>
+<meta charset="UTF-8">
+    <script type="text/javascript" src="../deploy/Cindy.js"></script>
+    <script type="text/javascript" src="../deploy/Cindy3D.js"></script>
+    <script type="text/javascript" src="../deploy/CindyXR.js"></script>
+<script id="csinit" type="text/x-cindyscript">
+
+    initxrcindy3d(referencemode->"local");
+
+    xrrenderfunction() := (
+    begin3d();
+    //draw points
+    repeat(100, i,
+      repeat(100,j,
+        repeat(100,k,
+           draw3d([i,j,k],size->.01f, color->[i/100,j/100,k/100])
+        )
+      )
+    );
+		
+    );
+    xr(xrrenderfunction());
+</script>
+
+<script type="text/javascript">
+    var cdy = CindyJS({
+        scripts: "cs*",
+        angleUnit: "°",
+        exclusive: "true",
+        ports: [
+            {id: "CSCanvas", background: "rgb(200,176,192)"}
+        ],
+        csconsole: false,
+        use: [
+            "Cindy3D", "CindyXR"
+        ],
+        autoplay: false,
+        behavior: []
+    });
+</script>
+</head>
+
+<body>
+    <canvas id="Cindy3D" style="border: none;" width="700" height="700"></canvas>
+    <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+</body>
+
+</html>
