@@ -12,17 +12,7 @@
     initxrcindy3d(referencemode->"local");
 
     xrrenderfunction() := (
-		begin3d();
-
-	   //setup controller - 1 indexed
-	    xrControllers =  getxrinputsources();
-        //grab the first available controller
-        inputsource = xrControllers_1;
-        //reads the position in homogeneous coordinates
-        //homogeneous coordinates end in 1 if tracked, zero if not tracked
-        position = inputsource.gripSpaceTransform.position;
-
-        size3d(.1);
+    begin3d();
     //draw points
     repeat(100, i,
       repeat(100,j,
