@@ -22,4 +22,4 @@ We use git and git-submodule
 * The webpage should load and connect to the HMD
 
 ## Examples
-[LatticeLand](../master/examples/LatticeLand.html)
+[LatticeLand](/master/examples/LatticeLand.html)
