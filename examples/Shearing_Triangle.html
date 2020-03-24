@@ -33,10 +33,13 @@
 			b=[0,0,0,1];
 			cDefault = [0,1,0,1];
 			if(take(position,4) == 0, position = cDefault);
-
+			
+		// if the controller is close to the line (this is a crude abstraction to dragging)
+		
+		if ((position-cDefault)*abHat < .01),
             //c uses a projection of the controller's last good position onto the line ab;
 			abHat = (a-b)/|a-b|;
-			c = ((position-cDefault)*abHat)*abHat + cDefault;
+			c = ((position-cDefault)*abHat)*abHat + cDefault;)
 
 
 		//draw parallel lines
