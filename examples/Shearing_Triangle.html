@@ -16,11 +16,39 @@
 
 	   //setup controller - 1 indexed
 	    xrControllers =  getxrinputsources();
-        //grab the first available controller
-        inputsource = xrControllers_1;
+        //grab the first available controllers
+        inputsourceL = xrControllers_1;
+        inputsourceR = xrControllers_2;
         //reads the position in homogeneous coordinates
         //homogeneous coordinates end in 1 if tracked, zero if not tracked
         position = inputsource.gripSpaceTransform.position;
+
+        // #1 Draw Controller Position, color appropriate for buttons.
+        if (inputsourceL.targetRayMode == "tracked-pointer",
+            // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
+            //buttons_1 is "squeeze button" for vive, but not quest.
+            //buttons_1 is "squeeze button" for vive, but not quest.
+            isSelectedL = inputsourceL.gamepad.buttons_3.pressed;
+            isSqueezedL = inputsourceL.gamepad.buttons_1.pressed;
+            controllerColor = [0,0,0];
+            if(isSelectedL, controllerColor = controllerColor + [1,0,0]);
+            if(isSqueezedL, controllerColor = controllerColor + [0,1,0]);
+            draw3d(inputsourceL.gripSpaceTransform.position, color->controllerColor, size->2);
+        );
+
+        // #2 Draw Controller Position, color appropriate for buttons.
+        if (inputsourceR.targetRayMode == "tracked-pointer",
+            // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
+            //buttons_1 is "squeeze button" for vive, but not quest.
+            //buttons_1 is "squeeze button" for vive, but not quest.
+            isSelectedR = inputsourceR.gamepad.buttons_3.pressed;
+            isSqueezedR = inputsourceR.gamepad.buttons_1.pressed;
+            controllerColor = [0,0,0];
+            if(isSelectedR, controllerColor = controllerColor + [1,0,0]);
+            if(isSqueezedR, controllerColor = controllerColor + [0,1,0]);
+            draw3d(inputsourceR.gripSpaceTransform.position, color->controllerColor, size->2);
+
+        );
 
         size3d(.1);
 
@@ -33,13 +61,10 @@
 			b=[0,0,0,1];
 			cDefault = [0,1,0,1];
 			if(take(position,4) == 0, position = cDefault);
-			
-		// if the controller is close to the line (this is a crude abstraction to dragging)
-		
-		if ((position-cDefault)*abHat < .01),
+
             //c uses a projection of the controller's last good position onto the line ab;
 			abHat = (a-b)/|a-b|;
-			c = ((position-cDefault)*abHat)*abHat + cDefault;)
+			c = ((position-cDefault)*abHat)*abHat + cDefault;
 
 
 		//draw parallel lines
