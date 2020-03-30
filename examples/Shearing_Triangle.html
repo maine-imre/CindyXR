@@ -11,18 +11,31 @@
 
     initxrcindy3d(referencemode->"local");
 
+        tolerance = .1;
+
     xrrenderfunction() := (
 		begin3d();
+
+        //environment parameters
+        size3d(.1);
+
+		//set bg color
+			background3d([.9,.9,.9]);
+
+	    //store vertex values as vectors
+        //note that this should eventually be switched over to cindy3d geometry
+        a=[1,0,0,1];
+        b=[0,0,0,1];
+        cDefault = [0,1,0,1];
+        c = cDefault;
 
 	   //setup controller - 1 indexed
 	    xrControllers =  getxrinputsources();
         //grab the first available controllers
         inputsourceL = xrControllers_1;
         inputsourceR = xrControllers_2;
-        //reads the position in homogeneous coordinates
-        //homogeneous coordinates end in 1 if tracked, zero if not tracked
-        position = inputsource.gripSpaceTransform.position;
 
+        // in a new plugin design, these functions should be moved outside the render function.
         // #1 Draw Controller Position, color appropriate for buttons.
         if (inputsourceL.targetRayMode == "tracked-pointer",
             // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
@@ -33,7 +46,22 @@
             controllerColor = [0,0,0];
             if(isSelectedL, controllerColor = controllerColor + [1,0,0]);
             if(isSqueezedL, controllerColor = controllerColor + [0,1,0]);
+            //reads the position in homogeneous coordinates
+            //homogeneous coordinates end in 1 if tracked, zero if not tracked
             draw3d(inputsourceL.gripSpaceTransform.position, color->controllerColor, size->2);
+
+            //use this controller to move the vertex 'c' if it is proximal to to the line.
+            //TODO drag point c instead of reassigning position.
+            positionL  = inputsourceL.gripSpaceTransform.position;
+
+            //project the controllers position onto the line
+            abHat = (a-b)/|a-b|;
+            controllerToLine =((positionL-cDefault)*abHat)*abHat + cDefault;
+
+            closeEnough = |positionL - controllerToLine| < tolerance;
+
+            //if sufficiently close and squeezing, project the controller onto the line.
+            if(isSqueezedL, if(closeEnough, c = controllerToLine));
         );
 
         // #2 Draw Controller Position, color appropriate for buttons.
@@ -46,26 +74,11 @@
             controllerColor = [0,0,0];
             if(isSelectedR, controllerColor = controllerColor + [1,0,0]);
             if(isSqueezedR, controllerColor = controllerColor + [0,1,0]);
+
+            //reads the position in homogeneous coordinates
+            //homogeneous coordinates end in 1 if tracked, zero if not tracked
             draw3d(inputsourceR.gripSpaceTransform.position, color->controllerColor, size->2);
-
         );
-
-        size3d(.1);
-
-		//set bg color
-			background3d([.9,.9,.9]);
-			
-		//store point values as vectors
-		//note that this should eventually be switched over to cindy3d geometry
-			a=[1,0,0,1];
-			b=[0,0,0,1];
-			cDefault = [0,1,0,1];
-			if(take(position,4) == 0, position = cDefault);
-
-            //c uses a projection of the controller's last good position onto the line ab;
-			abHat = (a-b)/|a-b|;
-			c = ((position-cDefault)*abHat)*abHat + cDefault;
-
 
 		//draw parallel lines
 			draw3d((a-b)*100+a,(a-b)*(-100)+a,size->.1, color->[.7,.7,.7]); //line through ab
