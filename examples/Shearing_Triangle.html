@@ -48,7 +48,7 @@
             if(isSqueezedL, controllerColor = controllerColor + [0,1,0]);
             //reads the position in homogeneous coordinates
             //homogeneous coordinates end in 1 if tracked, zero if not tracked
-            draw3d(inputsourceL.gripSpaceTransform.position, color->controllerColor, size->2);
+            draw3d(inputsourceL.gripSpaceTransform.position, color->controllerColor, size->.5);
 
             //use this controller to move the vertex 'c' if it is proximal to to the line.
             //TODO drag point c instead of reassigning position.
@@ -63,7 +63,7 @@
             //if sufficiently close and squeezing, project the controller onto the line.
             if(isSqueezedL, if(closeEnough, c = controllerToLine));
         );
-
+        // Use the 2nd controller to draw an intersecting segment
         // #2 Draw Controller Position, color appropriate for buttons.
         if (inputsourceR.targetRayMode == "tracked-pointer",
             // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
@@ -77,7 +77,15 @@
 
             //reads the position in homogeneous coordinates
             //homogeneous coordinates end in 1 if tracked, zero if not tracked
-            draw3d(inputsourceR.gripSpaceTransform.position, color->controllerColor, size->2);
+            draw3d(inputsourceR.gripSpaceTransform.position, color->controllerColor, size->.5);
+
+            //grab the height of the controller.
+            h = take(inputsourceR.gripSpaceTransform.position, 2);
+
+            // calculate and draw the intersecting segment
+            f = h*(c-a)/take(c-a,2) + a;
+            g = h*(c-b)/take(c-b,2) + b;
+            if(isSelectedR, draw3d(f,g,size -> .2, color-> [.1,.1,.1]));
         );
 
 		//draw parallel lines
