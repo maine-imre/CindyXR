@@ -39,8 +39,8 @@
         // #1 Draw Controller Position, color appropriate for buttons.
         if (inputsourceL.targetRayMode == "tracked-pointer",
             // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
-            //buttons_1 is "squeeze button" for vive, but not quest.
-            //buttons_1 is "squeeze button" for vive, but not quest.
+            //buttons_1 is "squeeze button" for vive and quest.
+            //buttons_3 is "select button" for vive, but not quest.
             isSelectedL = inputsourceL.gamepad.buttons_3.pressed;
             isSqueezedL = inputsourceL.gamepad.buttons_1.pressed;
             controllerColor = [0,0,0];
@@ -61,14 +61,14 @@
             closeEnough = |positionL - controllerToLine| < tolerance;
 
             //if sufficiently close and squeezing, project the controller onto the line.
-            if(isSqueezedL, if(closeEnough, c = controllerToLine));
+            if(isSelectedL, if(closeEnough, c = controllerToLine));
         );
         // Use the 2nd controller to draw an intersecting segment
         // #2 Draw Controller Position, color appropriate for buttons.
         if (inputsourceR.targetRayMode == "tracked-pointer",
             // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
-            //buttons_1 is "squeeze button" for vive, but not quest.
-            //buttons_1 is "squeeze button" for vive, but not quest.
+            //buttons_1 is "squeeze button" for vive and quest.
+            //buttons_3 is "select button" for vive, but not quest.
             isSelectedR = inputsourceR.gamepad.buttons_3.pressed;
             isSqueezedR = inputsourceR.gamepad.buttons_1.pressed;
             controllerColor = [0,0,0];
