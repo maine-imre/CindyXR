@@ -2,21 +2,25 @@
 This repository will be the source code for the IMRE Lab's CindyJS website that experiments with user-interaction for CindyXR
 
 ## Examples
-* [LatticeLand](https://maine-imre.github.io/CindyXR-Interactions/examples/LatticeLand.html)
-* [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/Shearing_Pyramid.html)
+<!--* [LatticeLand](https://maine-imre.github.io/CindyXR-Interactions/examples/LatticeLand.html)-->
+<!--:* [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/Shearing_Pyramid.html)-->
 * [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/Shearing_Triangle.html)
-* [Sphere Cross Section](https://maine-imre.github.io/CindyXR-Interactions/examples/SphereCrossSection.html)
+<!--:* [Sphere Cross Section](https://maine-imre.github.io/CindyXR-Interactions/examples/SphereCrossSection.html)-->
 
 ### Accessing Examples with HTC Vive (or Similar OpenVR)
 * Start SteamVR, connect HMD
-* Using a recent version of Firefox, open an html from the examples folder
+* Using a recent version of Firefox, open an html from https://maine-imre.github.io/CindyXR-Interactions/
 * Allow VR in Firefox
 * The webpage should load and connect to the HMD
 
 
-### Accessing Examples with Google Cardboard
-
-STUB
+### Accessing Examples with WebXR device emulator browser extension
+ * Using a recent version of Firefox, install WebXr Emulator extension
+ * Open an html from https://maine-imre.github.io/CindyXR-Interactions/
+ * Allow VR in Firefox
+ * Right click on the page.  Choose "Inspect Element"
+ * In the Firefox Developer Tools, choose "WebXR"
+ * The WebXR tab will allow you to control the HMD and Controllers, while the content is rendered in the browser page.
 
 ## Getting Started
 ### For Development of new Scenes
