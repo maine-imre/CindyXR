@@ -12,14 +12,14 @@
     initxrcindy3d(referencemode->"local");
         tolerance = 1;
 
-    drawTriangle3d(x,y,z) := (
-
-		//draw line segments ab
+    drawQuad3d(x,y,z,w) := (
+		//draw line segments
 			draw3d(x,y, color->[0,0,0]);
 			draw3d(y,z, color->[0,0,0]);
-			draw3d(z,x, color->[0,0,0]);
-		//draw triangle abc
-			fillpoly3d([x,y,z], color->[.9,.9,.9]);
+			draw3d(z,w, color->[0,0,0]);
+			draw3d(w,x, color->[0,0,0]);
+		//draw quad x,y,z,w
+			fillpoly3d([x,y,z,w], color->[.9,.9,.9]);
     );
 
     xrrenderfunction() := (
@@ -33,15 +33,14 @@
 
 		//store point values as vectors
 		//note that this should eventually be switched over to cindy3d geometry
-			a=[sqrt(8/9),4/3,0];
-			b=[-sqrt(2/9),4/3,sqrt(2/3)];
-			c=[-sqrt(2/9),4/3,-sqrt(2/3)];
-			d=[0,0,0];
-
-			a = a*3/4;
-			b = b*3/4;
-			c = c*3/4;
-			d = d*3/4;
+			a = [0,0,0];
+			b = [1,0,0];
+			c = [1,1,0];
+			d = [0,1,0];
+			e = [0,0,1];
+			f = [0,1,1];
+			g = [1,0,1];
+			h = [1,1,1];
 
 
     	   //setup controller - 1 indexed
@@ -87,29 +86,38 @@
             draw3d(inputsourceR.gripSpaceTransform.position, color->controllerColor, size->.5);
 
             //grab the height of the controller.
-            h = inputsourceR.gripSpaceTransform.position.y;
+            height = inputsourceR.gripSpaceTransform.position.y;
 
             // calculate and draw the intersecting plane
-            i = h*(a-d)/take(a-d,2) + d;  //d-a
-            j = h*(b-d)/take(b-d,2) + d;  //d-b
-            k = h*(c-d)/take(c-d,2) + d;  //d-c
-            if(!isSelectedR & (h > 0 & h < 1), fillpoly3d([i,j,k],color -> [.5,.5,.5]));
+            //TODO generalize to multiple angles
+            j = [0,height,0];
+            k = [1,height,0];
+            l = [1,height,1];
+            m = [0,height,1];
+
+            if(!isSelectedR & (height > 0 & height < 1), fillpoly3d([j,k,l,m],color -> [.5,.5,.5]));
         );
 
 
         if(isSelectedR,
         //draw faces
         //TODO these need transparencies.
-            drawTriangle3d(a,b,d);
-            drawTriangle3d(b,c,d);
-            drawTriangle3d(c,a,d);
-            drawTriangle3d(a,b,c);
+            drawQuad3d(a,b,c,d);
+            drawQuad3d(a,b,g,e);
+            drawQuad3d(a,d,f,e);
+            drawQuad3d(h,g,e,f);
+            drawQuad3d(h,c,d,f);
+            drawQuad3d(h,c,b,g);
 
 		//draw points abc
-			draw3d(a, size->.3, color->[1,0,0]);
-			draw3d(b, size->.3, color->[0,1,0]);
-			draw3d(c, size->.3, color->[0,0,1]);
-			draw3d(d, size->.3, color->[0,1,1]);
+			draw3d(a, size->.3, color->[1,1,1]);
+			draw3d(b, size->.3, color->[1,1,1]);
+			draw3d(c, size->.3, color->[1,1,1]);
+			draw3d(d, size->.3, color->[1,1,1]);
+			draw3d(e, size->.3, color->[1,1,1]);
+			draw3d(f, size->.3, color->[1,1,1]);
+			draw3d(g, size->.3, color->[1,1,1]);
+			draw3d(h, size->.3, color->[1,1,1]);
 		);
 
 		end3d();
