@@ -23,7 +23,10 @@ This repository will be the source code for the IMRE Lab's CindyJS website that 
  * The WebXR tab will allow you to control the HMD and Controllers, while the content is rendered in the browser page.
 
 ## Getting Started
+STUB
+
 ### For Development of new Scenes
+STUB
 
 ### Cloning Instructions
 We use git and git-submodule
@@ -45,7 +48,3 @@ STUB
 - Make a pull request to master
 - Add a link in the examples section to the html page
 - GitHub pages will include the new content within 10 minutes of the pull request being accepted.
-
-
-
-

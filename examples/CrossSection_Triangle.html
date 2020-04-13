@@ -24,6 +24,7 @@
 
 	    //store vertex values as vectors
         //note that this should eventually be switched over to cindy3d geometry
+        //set verticies to be an equilateral triangle
         a=[1,0,0,1];
         b=[0,0,0,1];
         cDefault = [0,1,0,1];
@@ -49,20 +50,8 @@
             //reads the position in homogeneous coordinates
             //homogeneous coordinates end in 1 if tracked, zero if not tracked
             draw3d(inputsourceL.gripSpaceTransform.position, color->controllerColor, size->.5);
-
-            //use this controller to move the vertex 'c' if it is proximal to to the line.
-            //TODO drag point c instead of reassigning position.
-            positionL  = inputsourceL.gripSpaceTransform.position;
-
-            //project the controllers position onto the line
-            abHat = (a-b)/|a-b|;
-            controllerToLine =((positionL-cDefault)*abHat)*abHat + cDefault;
-
-            closeEnough = |positionL - controllerToLine| < tolerance;
-
-            //if sufficiently close and squeezing, project the controller onto the line.
-            if(isSelectedL, if(closeEnough, c = controllerToLine));
         );
+
         // Use the 2nd controller to draw an intersecting segment
         // #2 Draw Controller Position, color appropriate for buttons.
         if (inputsourceR.targetRayMode == "tracked-pointer",
@@ -85,27 +74,24 @@
             // calculate and draw the intersecting segment
             f = h*(c-a)/take(c-a,2) + a;
             g = h*(c-b)/take(c-b,2) + b;
-            if(isSelectedR, draw3d(f,g,size -> .2, color-> [.1,.1,.1]));
+            if(!isSelectedR, draw3d(f,g,size -> .2, color-> [.1,.1,.1]));
         );
 
-		//draw parallel lines
-			draw3d((a-b)*100+a,(a-b)*(-100)+a,size->.1, color->[.7,.7,.7]); //line through ab
-			draw3d((a-b)*100+c,(a-b)*(-100)+c,size->.1, color->[.7,.7,.7]); //line through c parallel to ab
+        if(isSelectedR,
+            //draw line segments ab, bc, ac
+                draw3d(a,b, color->[0,0,0]);
+                draw3d(b,c, color->[0,0,0]);
+                draw3d(a,c, color->[0,0,0]);
 
-		//draw line segments ab, bc, ac
-			draw3d(a,b, color->[0,0,0]);
-			draw3d(b,c, color->[0,0,0]);
-			draw3d(a,c, color->[0,0,0]);
+            //draw points abc
+                draw3d(a, size->.3, color->[1,0,0]);
+                draw3d(b, size->.3, color->[0,1,0]);
+                draw3d(c, size->.3, color->[0,0,1]);
+                draw3d(c, size->.3, color->[0,0,1]);
 
-		//draw points abc
-			draw3d(a, size->.3, color->[1,0,0]);
-			draw3d(b, size->.3, color->[0,1,0]);
-			draw3d(c, size->.3, color->[0,0,1]);
-			draw3d(c, size->.3, color->[0,0,1]);
-
-
-		//draw triangle abc
-			fillpoly3d([a,b,c], color->[.9,.9,.9]);
+            //draw triangle abc
+                fillpoly3d([a,b,c], color->[.9,.9,.9]);
+		);
 		end3d();
     );
     xr(xrrenderfunction());
@@ -132,10 +118,10 @@
 <body>
     <a href="https://maine-imre.github.io/CindyXR-Interactions/">CindyXR Interactions Home</a>
     <b>Left Controller</b>
-    Move up and down to cross-sect the triangle.
-    Press "Select" to view the triangle.
+        Move up and down to cross-sect the triangle.
+        Press "Select" to view the triangle.
     <b>Right Controller</b>
-    Drag left and right while pressing "Select" to drag the apex along the line.
+        N/A
     <canvas id="Cindy3D" style="border: none;" width="700" height="700"></canvas>
     <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
 </body>
