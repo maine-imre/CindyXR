@@ -25,10 +25,9 @@
 	    //store vertex values as vectors
         //note that this should eventually be switched over to cindy3d geometry
         //set verticies to be an equilateral triangle
-        a=[1,0,0,1];
-        b=[0,0,0,1];
-        cDefault = [0,1,0,1];
-        c = cDefault;
+        a=[.5,0,0,1];
+        b=[-.5,0,0,1];
+        c = [0,sqrt(1-.5*.5),0,1];
 
 	   //setup controller - 1 indexed
 	    xrControllers =  getxrinputsources();
