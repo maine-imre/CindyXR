@@ -104,11 +104,11 @@
             j = h*(e-b)/take(e-b,2) + b;  //e-b
             k = h*(e-c)/take(e-c,2) + c;  //e-c
             l = h*(e-d)/take(e-d,2) + d;  //e-d
-            if(isSelectedR, if(h < 1 & h > 0,fillpoly3d([i,j,k,l],color -> [.5,.5,.5])));
+            if(!isSelectedR, if(h < 1 & h > 0,fillpoly3d([i,j,k,l],color -> [.5,.5,.5])));
         );
 
 
-
+        if(isSelectedR,
         //draw faces
         //TODO these need transparencies.
             drawTriangle3d(a,b,e);
@@ -123,6 +123,7 @@
 			draw3d(c, size->.3, color->[0,0,1]);
 			draw3d(d, size->.3, color->[0,1,1]);
 			draw3d(e, size->.3, color->[1,0,1]);
+		);
 
 		end3d();
     );
@@ -154,8 +155,8 @@
 <body>
 	<a href="https://maine-imre.github.io/CindyXR-Interactions/">CindyXR Interactions Home</a>
     <b>Left Controller</b>
-    Move up and down to cross-sect the triangle.
-    Press "Select" to view the triangle.
+    Move up and down to cross-sect the pyramid.
+    Press "Select" to view the pyramid.
     <b>Right Controller</b>
     Drag left and right while pressing "Select" to drag the apex along the line.
 <canvas id="Cindy3D" style="border: none;" width="1000" height="500"></canvas>

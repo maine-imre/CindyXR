@@ -2,7 +2,7 @@
 <html>
 
 <head>
-<title>Shearing Triangle DEMO</title>
+<title>CrossSection Triangle</title>
 <meta charset="UTF-8">
     <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy.js"></script>
     <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy3D.js"></script>
@@ -74,7 +74,9 @@
             // calculate and draw the intersecting segment
             f = h*(c-a)/take(c-a,2) + a;
             g = h*(c-b)/take(c-b,2) + b;
-            if(!isSelectedR, draw3d(f,g,size -> .2, color-> [.1,.1,.1]));
+
+            if (take(f,2) < take(c,2) & take(f,2) > take(a,2),
+            if(isSelectedR, draw3d(f,g,size -> .2, color-> [.1,.1,.1])););
         );
 
         if(isSelectedR,
