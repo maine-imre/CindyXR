@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shearing Triangle DEMO</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy.js"></script>
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy3D.js"></script>
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/CindyXR.js"></script>
+    <script id="csinit" type="text/x-cindyscript">
+
+    initxrcindy3d(referencemode->"local");
+        tolerance = 1;
+
+    xrrenderfunction() := (
+
+    begin3d();
+        size3d(.1);
+
+    //consider a 3-sphere with a radius of 1
+    //the controller will be used to determine a cross-secting plane using a mapping of its three-space coordinates.
+    radius = 1;
+
+    //set bg color
+	background3d([.9,.9,.9]);
+
+   	   //setup controller - 1 indexed
+	    xrControllers =  getxrinputsources();
+        //grab the first available controllers
+        inputsourceL = xrControllers_1;
+        inputsourceR = xrControllers_2;
+
+        // in a new plugin design, these functions should be moved outside the render function.
+        // #1 Draw Controller Position, color appropriate for buttons.
+        if (inputsourceL.targetRayMode == "tracked-pointer",
+            // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
+            //buttons_1 is "squeeze button" for vive and quest.
+            //buttons_3 is "select button" for vive, but not quest.
+            isSelectedL = inputsourceL.gamepad.buttons_3.pressed;
+            isSqueezedL = inputsourceL.gamepad.buttons_1.pressed;
+            controllerColor = [0,0,0];
+            if(isSelectedL, controllerColor = controllerColor + [1,0,0]);
+            if(isSqueezedL, controllerColor = controllerColor + [0,1,0]);
+            //reads the position in homogeneous coordinates
+            //homogeneous coordinates end in 1 if tracked, zero if not tracked
+
+
+            //use this controller to move the vertex 'c' if it is proximal to to the line.
+            //TODO drag point c instead of reassigning position.
+            positionL  = inputsourceL.gripSpaceTransform.position;
+            err(positionL);
+
+            draw3d([0,0,0], size-> .1, color -> [0,0,0]);
+            lenghtPL = sqrt(positionL.x*positionL.x+positionL.y*positionL.y+positionL.z*positionL.z);
+            err(lengthPL);  //returns NaN
+            if(lenghtPL < 1,
+
+            r = sqrt(1-lengthPL*lengthPL);
+                err(r);
+                draw3d(inputsourceL.gripSpaceTransform.position, color->controllerColor, size->10*r);
+            );
+            draw3d(inputsourceL.gripSpaceTransform.position, color->controllerColor, size->.5);
+        );
+		end3d();
+    );
+    xr(xrrenderfunction());
+</script>
+
+    <script type="text/javascript">
+        var cdy = CindyJS({
+            scripts: "cs*",
+            angleUnit: "°",
+            exclusive: "true",
+            geometry: [
+                {alpha: 0, color: [1, 0, 0], labeled: false, name: "A", pinned: true, type: "Free", pos: [-5,-2.8,1]},
+                {alpha: 0, color: [1, 0, 0], labeled: false, name: "B", pinned: true, type: "Free", pos: [5,-2.8,1]}
+            ],
+            ports: [
+                {id: "CSCanvas", background: "rgb(200,176,192)"}
+            ],
+            csconsole: false,
+            use: [
+                "Cindy3D", "CindyXR"
+            ],
+            autoplay: false,
+            behavior: []
+        });
+    </script>
+</head>
+
+<body>
+	<a href="https://maine-imre.github.io/CindyXR-Interactions/">CindyXR Interactions Home</a>
+<canvas id="Cindy3D" style="border: none;" width="1000" height="500"></canvas>
+<div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+</body>
+
+</html>
