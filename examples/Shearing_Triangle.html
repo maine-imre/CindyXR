@@ -45,6 +45,20 @@
 		//draw triangle abc
 			fillpoly3d([vertex_a,vertex_b,vertex_c], color->[.9,.9,.9]);
 		end3d();
+
+		//draw tracked controllers
+		xrinputsources = getxrinputsources();
+        repeat(length(xrinputsources), i,
+        inputsource = xrinputsources_i;
+        // We only want input sources regarding tracked controllers.
+        if (inputsource.targetRayMode == "tracked-pointer",
+            // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
+            isbuttonpressed = inputsource.gamepad.buttons_1.pressed;
+            color = if(isbuttonpressed, hue(0.1), hue(0.5));
+            color3d(color);
+            draw3d(inputsource.gripSpaceTransform.position);
+        );
+    );
     </script>
     <script id="xr-squeeze" type="text/x-cindyscript">
         tolerance = .1;
