@@ -2,22 +2,23 @@
 <html>
 
 <head>
-<title>Shearing Triangle</title>
-<meta charset="UTF-8">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/maine-imre/CindyJS-Deploy@xr-events/Cindy.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/maine-imre/CindyJS-Deploy@xr-events/Cindy3D.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/maine-imre/CindyJS-Deploy@xr-events/CindyXR.js"></script>
+    <title>WebGL testing</title>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="../../build/js/Cindy.js"></script>
+    <script type="text/javascript" src="../../build/js/Cindy3D.js"></script>
+    <script type="text/javascript" src="../../build/js/CindyXR.js"></script>
 
     <script id="csinit" type="text/x-cindyscript">
         use("Cindy3D");
-        use("CidnyXR");
+        use("CindyXR");
         initxrcindy3d(referencemode->"local");
-            vertex_a = [0,1,0,1];
-            vertex_b = [0,0,0,1];
-            vertex_c = [0,0,1,1];
-            vertices = [vertex_a,vertex_b,vertex_c];
 
+            vertex_a = [1,0,0,1];
+            vertex_b = [0,0,0,1];
+            vertex_c = [0,1,0,1];
+            vertices = [vertex_a,vertex_b,vertex_c];
     </script>
+
     <script id="xrdraw" type="text/x-cindyscript">
         begin3d();
 
@@ -25,16 +26,7 @@
             size3d(.1);
 
 		//set bg color
-			background3d([.9,.9,.9]);
-
-		//draw parallel lines
-			draw3d((vertex_a-vertex_b)*100+vertex_a,(vertex_a-vertex_b)*(-100)+vertex_a,size->.1, color->[.7,.7,.7]); //line through ab
-			draw3d((vertex_a-vertex_b)*100+vertex_c,(vertex_a-vertex_b)*(-100)+vertex_c,size->.1, color->[.7,.7,.7]); //line through c parallel to ab
-
-		//draw line segments ab, bc, ac
-			draw3d(vertex_a,vertex_b, color->[0,0,0]);
-			draw3d(vertex_b,vertex_c, color->[0,0,0]);
-			draw3d(vertex_a,vertex_c, color->[0,0,0]);
+			background3d([0.9,0.9,0.9]);
 
 		//draw points abc
 			draw3d(vertex_a, size->.3, color->[1,0,0]);
@@ -42,56 +34,54 @@
 			draw3d(vertex_c, size->.3, color->[0,0,1]);
 			draw3d(vertex_c, size->.3, color->[0,0,1]);
 
+		//draw line segments ab, bc, ac
+			draw3d(vertex_a,vertex_b, color->[0,0,0]);
+			draw3d(vertex_b,vertex_c, color->[0,0,0]);
+			draw3d(vertex_a,vertex_c, color->[0,0,0]);
+
+        //draw parallel lines
+			draw3d((vertex_a-vertex_b)*100+vertex_a,(vertex_a-vertex_b)*(-100)+vertex_a,size->.1, color->[.7,.7,.7]); //line through ab
+			draw3d((vertex_a-vertex_b)*100+vertex_c,(vertex_a-vertex_b)*(-100)+vertex_c,size->.1, color->[.7,.7,.7]); //line through c parallel to ab
+
 		//draw triangle abc
 			fillpoly3d([vertex_a,vertex_b,vertex_c], color->[.9,.9,.9]);
-		end3d();
 
-		//draw tracked controllers
-		xrinputsources = getxrinputsources();
+	    //draw tracked controllers
+        xrinputsources = getxrinputsources();
         repeat(length(xrinputsources), i,
-        inputsource = xrinputsources_i;
-        // We only want input sources regarding tracked controllers.
-        if (inputsource.targetRayMode == "tracked-pointer",
-            // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
-            isbuttonpressed = inputsource.gamepad.buttons_1.pressed;
-            color = if(isbuttonpressed, hue(0.1), hue(0.5));
-            color3d(color);
-            draw3d(inputsource.gripSpaceTransform.position);
+            inputsource = xrinputsources_i;
+            // We only want input sources regarding tracked controllers.
+            if (inputsource.targetRayMode == "tracked-pointer",
+                // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
+                isbuttonpressed = inputsource.gamepad.buttons_1.pressed;
+                color = if(isbuttonpressed, hue(0.1), hue(0.5));
+                color3d(color);
+                size(.3);
+                draw3d(inputsource.gripSpaceTransform.position);
+            );
         );
-    );
+
+        end3d();
     </script>
+
     <script id="xr-squeeze" type="text/x-cindyscript">
         tolerance = .1;
         print(inputsource)
         controllerPosition = inputsource.gripSpaceTransform.position;
-        forall(verticies,vertex,
+        repeat(length(verticies),i, //argument is not a list error
+            vertex = verticies_i;
             if(|controllerPosition - inputsource| < tolerance, vertex = controllerPosition);
         );
     </script>
 
-
-<script type="text/javascript">
-    var cdy = CindyJS({
-        scripts: "cs*",
-        angleUnit: "°",
-        exclusive: "true",
-        ports: [
-            {id: "CSCanvas", background: "rgb(200,176,192)"}
-        ],
-        csconsole: false,
-        use: [
-            "Cindy3D", "CindyXR"
-        ],
-        autoplay: false,
-        behavior: []
-    });
-</script>
+    <script type="text/javascript">
+        CindyJS({canvasname:"CSCanvas",scripts:"cs*"});
+    </script>
 </head>
 
 <body>
-    <a href="https://maine-imre.github.io/CindyXR-Interactions/">CindyXR Interactions Home</a>
-    <canvas id="Cindy3D" style="border: none;" width="700" height="700"></canvas>
-    <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+<canvas id="Cindy3D" style="border: none;" width="632" height="452"></canvas>
+<div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
 </body>
 
 </html>
