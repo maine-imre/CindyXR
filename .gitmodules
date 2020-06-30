@@ -1,6 +1,5 @@
-[submodule "CindyJS"]
-	path = CindyJS
-	url = git@github.com:CindyJS/CindyJS.git
 [submodule "deploy"]
 	path = deploy
 	url = https://www.github.com/CindyJS/deploy.git
+[submodules "Deploy"]
+	branch = snapshot
