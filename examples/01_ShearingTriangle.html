@@ -13,7 +13,12 @@
         use("CindyXR");
         initxrcindy3d(referencemode->"local");
 
-        vertices = [[1,0,0,1], [0,0,0,1], [0,1,0,1]];
+        vertices =
+          [
+            [1,0,0],
+            [0,0,0],
+            [0,1,0]
+          ];
         lineSlope = vertices_2-vertices_1;
     </script>
 
@@ -40,10 +45,8 @@
         );
 
         draw3Dtriangle(vertexList) :=(
-            //draw points abc
-			draw3d(vertexList_1, size->.3, color->[1,0,0]);
-			draw3d(vertexList_2, size->.3, color->[0,1,0]);
-			draw3d(vertexList_3, size->.3, color->[0,0,1]);
+          //draw vertices
+          repeat(length(vertices),i,draw3d(vertexList_i, size->.3, color->[1,0,0]));
 
 		    //draw line segments ab, bc, ac
 			draw3d(vertexList_1,vertexList_2, color->[0,0,0]);
@@ -69,7 +72,6 @@
         //draw parallel lines
             draw3Dline(vertices_1,lineSlope); //line thur ab
             draw3Dline(vertices_3,lineSlope); //parallel thru c
-
 
 	    //draw tracked controllers
 	        draw3Dxrinputsources(getxrinputsources());
