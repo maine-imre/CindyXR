@@ -2,14 +2,9 @@
 This repository will be the source code for the IMRE Lab's CindyJS website that experiments with user-interaction for CindyXR
 
 ## Examples
-<!--* [LatticeLand](https://maine-imre.github.io/CindyXR-Interactions/examples/LatticeLand.html)-->
-* [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/Shearing_Pyramid.html)
-* [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/Shearing_Triangle.html)
-* [CrossSection-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/CrossSection_Triangle.html)
-* [CrossSection-Square](https://maine-imre.github.io/CindyXR-Interactions/examples/CrossSection_Square.html)
-* [CrossSection-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/CrossSection_Pyramid.html)
-* [CrossSection-Cube](https://maine-imre.github.io/CindyXR-Interactions/examples/CrossSection_Cube.html)
-<!--:* [Sphere Cross Section](https://maine-imre.github.io/CindyXR-Interactions/examples/SphereCrossSection.html)-->
+* [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/01_Shearing_Triangle.html)
+* [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/02_Shearing_Pyramid.html)
+
 
 ### Accessing Examples with HTC Vive (or Similar OpenVR)
 * Start SteamVR, connect HMD

@@ -2,35 +2,55 @@
 <html>
 
 <head>
-<title>CrossSection Square</title>
+<title>SphereCrossSection</title>
+
 <meta charset="UTF-8">
     <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy.js"></script>
     <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy3D.js"></script>
     <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/CindyXR.js"></script>
 <script id="csinit" type="text/x-cindyscript">
 
-    initxrcindy3d(referencemode->"local");
+    initxrcindy3d(referencemode->"unbounded");
 
-        tolerance = .1;
+    //setup controller
+	xrControllers =  getxrinputsources();
+
+    size3d(.5); //default size.
+
+	circlePar(w, basis0, basis1, center, radius) := (radius*(sin(w)*basis1+cos(w)*basis0) + center);  //parameterized fn for circle
+
+    drawCircle(center, radius, basis0, basis1) := (
+    	repeat(n,i,
+	    	w1 = i/n*360;
+	    	w2 = (i+1)/n*360;
+	    	draw3d(radius*circlePar(w1, basis0, basis1, center, radius),radius*circlePar(w2, basis0, basis1, center, radius)); //draw circle as a set of line segments
+    	);
+    );
+
+    crossSectSphere(sCenter, sRadius, pPos, pNorm) := (
+    		pNorm = pNorm / |pNorm|;
+			center = (pPos-sCenter)*pNorm + sCenter;
+    		radius = re(sqrt(sRadius^2+|center-sCenter|^2));
+
+    		//need to define the basis with crossproduct
+    		basis0 = cross(pNorm,[1,0,0]);
+    		if(|basis0| == 0)
+    			basis0 = cross(pNorm,[0,1,0]);
+			else
+				basis0 = basis0/|basis0|;
+			basis1 = cross(pNorm,basis0);
+
+			drawCircle(center, radius, basis0, basis1);
+    );
+
+    //Sphere Crossection Parameters
+    	sphereCenter = [0,0,0];
+    	sphereRadius = 1;
 
     xrrenderfunction() := (
 		begin3d();
 
-        //environment parameters
-        size3d(.1);
-
-		//set bg color
-			background3d([.9,.9,.9]);
-
-	    //store vertex values as vectors
-        //note that this should eventually be switched over to cindy3d geometry
-        //set verticies to be an equilateral triangle
-        a = [1,0,0,1];
-        b = [0,0,0,1];
-        c = [0,1,0,1];
-        d = [1,1,0,1];
-
-	   //setup controller - 1 indexed
+		//setup controller - 1 indexed
 	    xrControllers =  getxrinputsources();
         //grab the first available controllers
         inputsourceL = xrControllers_1;
@@ -50,6 +70,10 @@
             //reads the position in homogeneous coordinates
             //homogeneous coordinates end in 1 if tracked, zero if not tracked
             draw3d(inputsourceL.gripSpaceTransform.position, color->controllerColor, size->.5);
+
+            //use this controller to move the vertex 'c' if it is proximal to to the line.
+            //TODO drag point c instead of reassigning position.
+            positionL  = inputsourceL.gripSpaceTransform.position;
         );
 
         // Use the 2nd controller to draw an intersecting segment
@@ -70,63 +94,23 @@
 
             //grab the height of the controller.
             h = take(inputsourceR.gripSpaceTransform.position, 2);
-
-            // calculate and draw the intersecting segment
-            f = h*(c-b)/take(c-b,2) + b;
-            g = h*(d-a)/take(d-a,2) + a;
-
-            if (take(f,2) < take(c,2) & take(f,2) > take(a,2),
-            if(!isSelectedR, draw3d(f,g,size -> .2, color-> [.1,.1,.1])););
+            crossSectSphere(sphereCenter, sphere
         );
 
-        if(isSelectedR,
-            //draw line segments ab, bc, ac
-                draw3d(a,b, color->[0,0,0]);
-                draw3d(b,c, color->[0,0,0]);
-                draw3d(c,d, color->[0,0,0]);
-                draw3d(d,a, color->[0,0,0]);
-
-            //draw points abc
-                draw3d(a, size->.3, color->[1,0,0]);
-                draw3d(b, size->.3, color->[0,1,0]);
-                draw3d(c, size->.3, color->[0,0,1]);
-                draw3d(d, size->.3, color->[0,1,1]);
-
-            //draw triangle abc
-                fillpoly3d([a,b,c,d], color->[.9,.9,.9]);
-		);
+			crossSectSphere(sphereCenter, sphereRadius, crossSectPlanePos, crossSectPlaneNorm);
 		end3d();
     );
     xr(xrrenderfunction());
 </script>
 
-<script type="text/javascript">
-    var cdy = CindyJS({
-        scripts: "cs*",
-        angleUnit: "°",
-        exclusive: "true",
-        ports: [
-            {id: "CSCanvas", background: "rgb(200,176,192)"}
-        ],
-        csconsole: false,
-        use: [
-            "Cindy3D", "CindyXR"
-        ],
-        autoplay: false,
-        behavior: []
-    });
-</script>
+    <script type="text/javascript">
+        CindyJS({canvasname:"CSCanvas",scripts:"cs*"});
+    </script>
 </head>
 
 <body>
-    <a href="https://maine-imre.github.io/CindyXR-Interactions/">CindyXR Interactions Home</a>
-    <b>Left Controller</b>
-        Move up and down to cross-sect the square.
-        Press "Select" to view the square.
-    <b>Right Controller</b>
-        N/A
-    <canvas id="Cindy3D" style="border: none;" width="700" height="700"></canvas>
-    <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+<canvas id="Cindy3D" style="border: none;" width="632" height="452"></canvas>
+<div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
 </body>
 
 </html>
