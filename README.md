@@ -2,10 +2,9 @@
 This repository will be the source code for the IMRE Lab's CindyJS website that experiments with user-interaction for CindyXR
 
 ## Examples
-<!--* [LatticeLand](https://maine-imre.github.io/CindyXR-Interactions/examples/LatticeLand.html)-->
-<!--:* [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/Shearing_Pyramid.html)-->
-* [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/Shearing_Triangle.html)
-<!--:* [Sphere Cross Section](https://maine-imre.github.io/CindyXR-Interactions/examples/SphereCrossSection.html)-->
+* [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/01_Shearing_Triangle.html)
+* [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/02_Shearing_Pyramid.html)
+
 
 ### Accessing Examples with HTC Vive (or Similar OpenVR)
 * Start SteamVR, connect HMD
@@ -23,7 +22,10 @@ This repository will be the source code for the IMRE Lab's CindyJS website that 
  * The WebXR tab will allow you to control the HMD and Controllers, while the content is rendered in the browser page.
 
 ## Getting Started
+STUB
+
 ### For Development of new Scenes
+STUB
 
 ### Cloning Instructions
 We use git and git-submodule
@@ -45,7 +47,3 @@ STUB
 - Make a pull request to master
 - Add a link in the examples section to the html page
 - GitHub pages will include the new content within 10 minutes of the pull request being accepted.
-
-
-
-

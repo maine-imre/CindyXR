@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>LatticeLand</title>
+<meta charset="UTF-8">
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy.js"></script>
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy3D.js"></script>
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/CindyXR.js"></script>
+    <script id="csinit" type="text/x-cindyscript">
+           use("Cindy3D");
+           use("CindyXR");
+           initxrcindy3d(referencemode->"local");
+           scale = 0.2;
+
+           listValues = 0..2;
+           listValues = apply(listValues,(#*scale));
+           listPoints = directProduct(directProduct(listValues,listValues),listValues);
+           listPoints = apply(listPoints,flatten(#));
+           print(listPoints);
+
+           listEdges = [];
+           listPolys = [[listPoints,listPoints_2,listPoints_5,listPoints_6]];
+       </script>
+
+       <script id="xrdraw" type="text/x-cindyscript">
+           //Function Definitions:
+           draw3Dxrinputsources(xrinputsources) :=(
+               repeat(length(xrinputsources), i,
+                   inputsource = xrinputsources_i;
+                   // We only want input sources regarding tracked controllers.
+                   if (inputsource.targetRayMode == "tracked-pointer",
+                       // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
+                       isbuttonpressed = inputsource.gamepad.buttons_1.pressed;
+                       color = if(isbuttonpressed, hue(0.1), hue(0.5));
+                       color3d(color);
+                       size3d(.3);
+                       draw3d(inputsource.gripSpaceTransform.position);
+                   );
+               );
+            );
+
+           //begin applet
+           begin3d();
+
+           //environment parameters
+               size3d(.1);
+
+   		//set bg color
+   			background3d([0.9,0.9,0.9]);
+
+   	    //draw points
+   	    repeat(length(listPoints),i,draw3D(listPoints_i, size->.1, color->[1,0,0]));
+
+   	    //draw edges
+   	    repeat(
+   	        length(listEdges),i,
+   	        draw3D(((listEdges_i)_1), ((listEdges_i)_2), size->.3, color->[0,1,0])
+   	     );
+
+   	    //draw polys
+   	    repeat(
+   	        length(listPolys),i,
+   	        fillpoly3d(listPolys_i,color->[0,0,1])
+           );
+
+   	    //draw tracked controllers
+   	        draw3Dxrinputsources(getxrinputsources());
+
+           end3d();
+       </script>
+
+       <script id="xrselectstart" type="text/x-cindyscript">
+           //draw edge
+       </script>
+
+       <script id="xrsqueezestart" type="text/x-cindyscript">
+           //draw poly
+       </script>
+
+       <script type="text/javascript">
+           CindyJS({canvasname:"CSCanvas",scripts:"cs*"});
+       </script>
+   </head>
+
+   <body>
+   <canvas id="Cindy3D" style="border: none;" width="632" height="452"></canvas>
+   <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+   </body>
+
+   </html>
