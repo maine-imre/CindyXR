@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Shearing Triangle DEMO</title>
     <meta charset="UTF-8">
-    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy.js"></script>
-    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy3D.js"></script>
-    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/CindyXR.js"></script>
-    <script id="csinit" type="text/x-cindyscript">
-      use("Cindy3D");
-      use("CindyXR");
-      initxrcindy3d(referencemode->"local");
+    <title>WebGL testing</title>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #CSCanvas {
+            width: 800px; height: 800px;
+        }
+    </style>
+    <script type="text/javascript" src="../deploy/Cindy.js"></script>
+    <script type="text/javascript" src="../deploy/Cindy3D.js"></script>
+    <script type="text/javascript" src="../deploy/CindyXR.js"></script>
+
+    <script id="init" type="text/x-cindyscript">
+        use("Cindy3D");
+        use("CindyXR");
+        initxrcindy3d(referencemode->"local");
 
       vertices = [[1,0,0],[0,0,0,],[1,0,1],[.5,1,.5]];
     </script>
@@ -112,13 +122,13 @@
 
 
         <script type="text/javascript">
-            CindyJS({canvasname:"CSCanvas",scripts:"cs*"});
+            CindyJS({canvasname:"CSCanvas",scripts:"*"});
         </script>
-    </head>
-    
-<body>
-<canvas id="Cindy3D" style="border: none;" width="632" height="452"></canvas>
-<div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
-</body>
+        </head>
 
-</html>
+        <body>
+            <canvas id="Cindy3D" style="border: none;" width="632" height="452"></canvas>
+            <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+        </body>
+
+    </html>
