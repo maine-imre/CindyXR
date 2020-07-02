@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CindyXR Template</title>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #CSCanvas {
+            width: 800px; height: 800px;
+        }
+    </style>
+    <script type="text/javascript" src="../deploy/Cindy.js"></script>
+    <script type="text/javascript" src="../deploy/Cindy3D.js"></script>
+    <script type="text/javascript" src="../deploy/CindyXR.js"></script>
+
+    <script id="init" type="text/x-cindyscript">
+        use("Cindy3D");
+        use("CindyXR");
+        initxrcindy3d(referencemode->"local");
+
+    </script>
+
+    <script id="xrdraw" type="text/x-cindyscript">
+        //Function Definitions:
+        draw3Dxrinputsources(xrinputsources) :=(
+            repeat(length(xrinputsources), i,
+                inputsource = xrinputsources_i;
+                // We only want input sources regarding tracked controllers.
+                if (inputsource.targetRayMode == "tracked-pointer",
+                    // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
+                    isbuttonpressed = inputsource.gamepad.buttons_1.pressed;
+                    color = if(isbuttonpressed, hue(0.1), hue(0.5));
+                    color3d(color);
+                    size3d(.3);
+                    draw3d(inputsource.gripSpaceTransform.position);
+                );
+            );
+         );
+
+        //begin applet
+        begin3d();
+
+        //environment parameters
+            size3d(.1);
+
+		//set bg color
+			background3d([0.9,0.9,0.9]);
+
+
+	    //draw tracked controllers
+	        draw3Dxrinputsources(getxrinputsources());
+
+        end3d();
+    </script>
+
+    <script id="xrselecthold" type="text/x-cindyscript">
+      //select interaction
+    </script>
+
+    <script id="xrsqueezehold" type="text/x-cindyscript">
+      //squeeze interaction
+    </script>
+
+
+        <script type="text/javascript">
+            CindyJS({canvasname:"CSCanvas",scripts:"*"});
+        </script>
+        </head>
+
+        <body>
+            <canvas id="Cindy3D" style="border: none;" width="632" height="452"></canvas>
+            <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+        </body>
+
+    </html>
