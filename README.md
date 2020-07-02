@@ -1,4 +1,4 @@
-# [CindyXR](https://maine-imre.github.io/CindyXR-Interactions/)
+# [CindyXR-Interactions](https://maine-imre.github.io/CindyXR-Interactions/)
 This repository will be the source code for the IMRE Lab's CindyJS website that experiments with user-interaction for CindyXR
 
 ## Examples
