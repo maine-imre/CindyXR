@@ -2,7 +2,7 @@
 This repository has a few examples of spatial interactions with spatial diagrams developed by the IMRE Lab at the University of Maine.
 Each example will have functionality mapped to the *squeeze* and *select* buttons on WebXR compatable devices.
 
-Take the ``examples/template.html`` and add code in the ``init``, ``xrdraw``, ``xrsqueezehold``, and ``xrselecthold`` scripts.
+Take the [Development Template](https://maine-imre.github.io/CindyXR-Interactions/docs/templateexample.md) and add code in the ``init``, ``xrdraw``, ``xrsqueezehold``, and ``xrselecthold`` scripts.
 These scripts are all written in CindyScript.  See [CindyScript docs](https://github.com/CindyJS/CindyJS/blob/master/ref/createCindy.md).
 
 ### Cloning Instructions
