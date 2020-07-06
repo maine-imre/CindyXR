@@ -8,6 +8,7 @@ This project builds on CindyJS and the CindyXR plugin.  In particular, we use [C
 * [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/01_Shearing_Triangle.html)
 * [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/02_Shearing_Pyramid.html)
 
-## [Accessing Examples on Your Device](https://maine-imre.github.io/CindyXR-Interactions/docs/deviceaccess.md)
-## [Developing Scenes](https://maine-imre.github.io/CindyXR-Interactions/docs/newscenes.md)
-## [Development Template](https://maine-imre.github.io/CindyXR-Interactions/docs/templateexample.md)
+## More Info
+ - [Accessing Examples on Your Device](https://maine-imre.github.io/CindyXR-Interactions/docs/deviceaccess.md)
+ - [Developing Scenes](https://maine-imre.github.io/CindyXR-Interactions/docs/newscenes.md)
+ - [Development Template](https://maine-imre.github.io/CindyXR-Interactions/docs/templateexample.md)
