@@ -63,7 +63,7 @@ No changes to the source are necessary: in both cases, address the ``Cindy.js`` 
 - GitHub pages will include the new content within 10 minutes of the pull request being accepted.
 
 # Template Example
-In this section, we walk through the content in our ``template.html`` and a place to get started with CindyXR scenes.
+In this section, we walk through the content in our [cindyxr_template.html](/examples/cindyxr_template.html) and a place to get started with CindyXR scenes.
 
 ## Header
 The header includes references to CindyJS, CindyXR and Cindy3D in ``../deploy/``.  If you are using CindyGL, add a reference here.
