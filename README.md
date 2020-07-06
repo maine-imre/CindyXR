@@ -4,7 +4,7 @@ This project builds on CindyJS and the CindyXR plugin.  In particular, we use [C
 (https://github.com/CindyJS/CindyJS) to render spatial diagrams and use the [CindyXR](https://github.com/chrismile/CindyJS) plugin to access *select* and *squeeze* events from controllers, along with their positions in 3-spac to made the diagrams interactable.  Thank you [@chrismile](https://github.com/chrismile) for developing the event system that makes this possible!
 
 
-## Examples
+## Example Scenes
 * [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/01_Shearing_Triangle.html)
 * [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/02_Shearing_Pyramid.html)
 
