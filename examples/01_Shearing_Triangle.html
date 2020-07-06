@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>WebGL testing</title>
+    <title>01_Shearing_Triangle</title>
     <style type="text/css">
         body {
             margin: 0px;
@@ -22,6 +22,8 @@
         use("CindyXR");
         initxrcindy3d(referencemode->"local-floor");
 
+        tolerance = 0.03;
+
         vertices =
           [
             [1,.5,0,1],
@@ -39,11 +41,12 @@
         draw3Dxrinputsources(xrinputsources) :=(
             repeat(length(xrinputsources), i,
                 inputsource = xrinputsources_i;
+                print(inputsource.profiles);
                 // We only want input sources regarding tracked controllers.
                 if (inputsource.targetRayMode == "tracked-pointer",
                     // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
                     handedness = inputsource.handedness;
-                    draw3d(inputsource.gripSpaceTransform.position, size -> 0.3, color ->[get(selectButton,handedness),get(squeezeButton,handedness),(0.5)]);
+                    draw3d(inputsource.gripSpaceTransform.position, size -> 0.3, color ->[get(selectButton,handedness),get(squeezeButton,handedness),(0.0)]);
                 );
             );
          );
@@ -95,7 +98,6 @@
         );
 
         //drag the verticies when proximal and holding the squeeze button, but keep it on its line.
-        tolerance = .5;
         controllerPosition = inputsource.gripSpaceTransform.position;
         repeat(length(vertices), i,
             print(controllerPosition);
@@ -118,7 +120,6 @@
 
     <script id="xrsqueezehold" type="text/x-cindyscript">
         //drag the verticies when proximal and holding the squeeze button
-        tolerance = .5;
         controllerPosition = inputsource.gripSpaceTransform.position;
         repeat(length(vertices), i,
             closeEnough = |(controllerPosition - vertices_(i))| < tolerance;
