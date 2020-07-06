@@ -1,8 +1,7 @@
-## Getting Started
+## Getting Started Developing new Scenes
 This repository has a few examples of spatial interactions with spatial diagrams developed by the IMRE Lab at the University of Maine.
-Each example will have functionality mapped to 
+Each example will have functionality mapped to the *squeeze* and *select* buttons on WebXR compatable devices.
 
-### For Development of new Scenes
 Take the ``examples/template.html`` and add code in the ``init``, ``xrdraw``, ``xrsqueezehold``, and ``xrselecthold`` scripts.
 These scripts are all written in CindyScript.  See [CindyScript docs](https://github.com/CindyJS/CindyJS/blob/master/ref/createCindy.md).
 
