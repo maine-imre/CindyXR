@@ -10,4 +10,4 @@ This project builds on CindyJS and the CindyXR plugin.  In particular, we use [C
 
 ## [Accessing Examples on Your Device](https://maine-imre.github.io/CindyXR-Interactions/docs/deviceaccess/)
 ## [Developing Scenes](https://maine-imre.github.io/CindyXR-Interactions/docs/newscenes/)
-### [Development Template](https://maine-imre.github.io/CindyXR-Interactions/docs/templateexample/)
+## [Development Template](https://maine-imre.github.io/CindyXR-Interactions/docs/templateexample/)
