@@ -1,6 +1,7 @@
 # [CindyXR-Interactions](https://maine-imre.github.io/CindyXR-Interactions/)
 This repository has a few examples of spatial interactions with spatial diagrams developed by the IMRE Lab at the University of Maine.
-This project builds on CindyJS and the CindyXR plugin.  In particular, we use CindyJS to render spatial diagrams and use the CindyXR pluging to access *select* and *squeeze* events from controllers, along with their positions in 3-spac to made the diagrams interactable.
+This project builds on CindyJS and the CindyXR plugin.  In particular, we use [CindyJS]
+(https://github.com/CindyJS/CindyJS) to render spatial diagrams and use the [CindyXR](https://github.com/chrismile/CindyJS) plugin to access *select* and *squeeze* events from controllers, along with their positions in 3-spac to made the diagrams interactable.  Thank you [@chrismile](https://github.com/chrismile) for developing the event system that makes this possible!
 
 
 ## Examples
@@ -24,7 +25,8 @@ This project builds on CindyJS and the CindyXR plugin.  In particular, we use Ci
  * The WebXR tab will allow you to control the HMD and Controllers, while the content is rendered in the browser page.
  
  ### Accessing Examples with WebXR all-in-one device (Oculus Quest or similar)
- STUB
+  * Open te Oculus Browser or Firefox Reality on the device
+  * Navigate to https://maine-imre.github.io/CindyXR-Interactions/
 
 ## Getting Started
 This repository has a few examples of spatial interactions with spatial diagrams developed by the IMRE Lab at the University of Maine.
@@ -32,7 +34,7 @@ Each example will have functionality mapped to
 
 ### For Development of new Scenes
 Take the ``examples/template.html`` and add code in the ``init``, ``xrdraw``, ``xrsqueezehold``, and ``xrselecthold`` scripts.
-These scripts are all written in CindyScript.  See CindyScript docs [link].
+These scripts are all written in CindyScript.  See [CindyScript docs](https://github.com/CindyJS/CindyJS/blob/master/ref/createCindy.md).
 
 ### Cloning Instructions
 We use git and git-submodule to include a recent deployment of CindyJS with the CindyXR plugin. 
@@ -43,9 +45,6 @@ For a stable solution, build CindyJS on your web server or use a release from th
 * git submodule init
 * git pull --recurse-submodules
 
-### Style
-
-STUB
 
 ### Rendering in XR
 CindyXR supports an xr-draw script, using draw3D commands.  We plan to write some helpful functions that extend draw3D to structs with geometric element data.
