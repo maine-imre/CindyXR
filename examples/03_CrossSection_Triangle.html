@@ -29,6 +29,8 @@
             [0,1,0,1]
           ];
         lineSlope = vertices_2-vertices_1;
+        selectButton = dict(left->0, right->0);
+        squeezeButton = dict(left->0, right->0);
     </script>
 
     <script id="xrdraw" type="text/x-cindyscript">
@@ -39,11 +41,8 @@
                 // We only want input sources regarding tracked controllers.
                 if (inputsource.targetRayMode == "tracked-pointer",
                     // Draw a ball at the position of the controller and color it depending on whether button 1 is pressed.
-                    isbuttonpressed = inputsource.gamepad.buttons_1.pressed;
-                    color = if(isbuttonpressed, hue(0.1), hue(0.5));
-                    color3d(color);
-                    size3d(.3);
-                    draw3d(inputsource.gripSpaceTransform.position);
+                    handedness = inputsource.handedness;
+                    draw3d(inputsource.gripSpaceTransform.position, size -> 0.3, color ->[get(selectButton,handedness),get(squeezeButton,handedness),(0.0)]);
                 );
             );
          );
@@ -107,6 +106,14 @@
         );
     </script>
 
+    <script id="xrselectstart" type="text/x-cindyscript">
+      selectButton = put(selectButton, inputsource.handedness, 1);
+    </script>
+
+    <script id="xrselectend" type="text/x-cindyscript">
+      selectButton = put(selectButton, inputsource.handedness, 0);
+    </script>
+
     <script id="xrsqueezehold" type="text/x-cindyscript">
         //drag the verticies when proximal and holding the squeeze button
         tolerance = .5;
@@ -118,6 +125,14 @@
                 lineSlope = vertices_2-vertices_1;
             );
         );
+    </script>
+
+    <script id="xrsqueezestart" type="text/x-cindyscript">
+      selectButton = put(selectButton, inputsource.handedness, 1);
+    </script>
+
+    <script id="xrsqueezeend" type="text/x-cindyscript">
+      selectButton = put(squeezeButton, inputsource.handedness, 0);
     </script>
 
         <script type="text/javascript">
