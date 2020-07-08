@@ -20,8 +20,14 @@
     <script id="init" type="text/x-cindyscript">
         use("Cindy3D");
         use("CindyXR");
-        initxrcindy3d(referencemode->"local");
-      vertices = [[1,0,0],[0,0,0,],[1,0,1],[.5,1,.5]];
+        initxrcindy3d(referencemode->"local-floor");
+      vertices =
+        [
+          [1,0,0,1],
+          [0,0,0,1],
+          [1,0,1,1],
+          [.5,1,.5,1]
+        ];
     </script>
 
     <script id="xrdraw" type="text/x-cindyscript">
