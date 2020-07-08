@@ -20,14 +20,14 @@
     <script id="init" type="text/x-cindyscript">
         use("Cindy3D");
         use("CindyXR");
-        initxrcindy3d(referencemode->"local");
+        initxrcindy3d(referencemode->"local-floor");
 
         vertices =
           [
-            [1,0,0],
-            [0,0,0],
-            [0,1,0],
-            [1,1,0]
+            [1,0,0,1],
+            [0,0,0,1],
+            [0,1,0,1],
+            [1,1,0,1]
           ];
         lineSlope = vertices_2-vertices_1;
     </script>
