@@ -1,49 +1,13 @@
-# [CindyXR](https://maine-imre.github.io/CindyXR-Interactions/)
-This repository will be the source code for the IMRE Lab's CindyJS website that experiments with user-interaction for CindyXR
+# [CindyXR-Interactions](https://maine-imre.github.io/CindyXR-Interactions/)
+This repository has a few examples of spatial interactions with spatial diagrams developed by the IMRE Lab at the University of Maine.
+This project builds on CindyJS and the CindyXR plugin.  In particular, we use [CindyJS]
+(https://github.com/CindyJS/CindyJS) to render spatial diagrams and use the [CindyXR](https://github.com/chrismile/CindyJS) plugin to access *select* and *squeeze* events from controllers, along with their positions in 3-spac to made the diagrams interactable.  Thank you [@chrismile](https://github.com/chrismile) for developing the event system that makes this possible!
 
-## Examples
+
+## Example Scenes
 * [Shearing-Triangle](https://maine-imre.github.io/CindyXR-Interactions/examples/01_Shearing_Triangle.html)
-* [Shearing-Pyramid](https://maine-imre.github.io/CindyXR-Interactions/examples/02_Shearing_Pyramid.html)
 
-
-### Accessing Examples with HTC Vive (or Similar OpenVR)
-* Start SteamVR, connect HMD
-* Using a recent version of Firefox, open an html from https://maine-imre.github.io/CindyXR-Interactions/
-* Allow VR in Firefox
-* The webpage should load and connect to the HMD
-
-
-### Accessing Examples with WebXR device emulator browser extension
- * Using a recent version of Firefox, install WebXr Emulator extension
- * Open an html from https://maine-imre.github.io/CindyXR-Interactions/
- * Allow VR in Firefox
- * Right click on the page.  Choose "Inspect Element"
- * In the Firefox Developer Tools, choose "WebXR"
- * The WebXR tab will allow you to control the HMD and Controllers, while the content is rendered in the browser page.
-
-## Getting Started
-STUB
-
-### For Development of new Scenes
-STUB
-
-### Cloning Instructions
-We use git and git-submodule
-
-* git clone git@github.com:maine-imre/CindyXR
-* git submodule init
-* git pull --recurse-submodules
-
-### Style
-
-STUB
-
-### Interactions
-
-STUB
-
-### To make development available on the site
-- Make an html page in the **examples** folder
-- Make a pull request to master
-- Add a link in the examples section to the html page
-- GitHub pages will include the new content within 10 minutes of the pull request being accepted.
+## More Info
+ - [Accessing Examples on Your Device](https://maine-imre.github.io/CindyXR-Interactions/docs/deviceaccess.md)
+ - [Developing Scenes](https://maine-imre.github.io/CindyXR-Interactions/docs/newscenes.md)
+ - [Development Template](https://maine-imre.github.io/CindyXR-Interactions/docs/templateexample.md)
