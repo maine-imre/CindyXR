@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
     <title>WebGL testing</title>
-    <style type="text/css">
-        body {
-            margin: 0px;
-            padding: 0px;
-        }
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy.js"></script>
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/Cindy3D.js"></script>
+    <script type="text/javascript" src="https://maine-imre.github.io/CindyXR-Interactions/deploy/CindyXR.js"></script>
 
-        #CSCanvas {
-            width: 800px; height: 800px;
-        }
-    </style>
-    <script type="text/javascript" src="../deploy/Cindy.js"></script>
-    <script type="text/javascript" src="../deploy/Cindy3D.js"></script>
-    <script type="text/javascript" src="../deploy/CindyXR.js"></script>
-
-    <script id="init" type="text/x-cindyscript">
+    <script id="csinit" type="text/x-cindyscript">
         use("Cindy3D");
         use("CindyXR");
         initxrcindy3d(referencemode->"local");
@@ -26,8 +17,7 @@
           [
             [1,0,0],
             [0,0,0],
-            [0,1,0],
-            [1,1,0]
+            [0,1,0]
           ];
         lineSlope = vertices_2-vertices_1;
     </script>
@@ -54,18 +44,17 @@
      		draw3d(point+1000*slope,point-1000*slope,size->.1, color->[.7,.7,.7]);
         );
 
-        draw3Dquad(vertices);
+        draw3Dtriangle(vertexList) :=(
           //draw vertices
           repeat(length(vertices),i,draw3d(vertexList_i, size->.3, color->[1,0,0]));
 
-		    //draw line segments ab, bc, cd, ad
+		    //draw line segments ab, bc, ac
 			draw3d(vertexList_1,vertexList_2, color->[0,0,0]);
 			draw3d(vertexList_2,vertexList_3, color->[0,0,0]);
-			draw3d(vertexList_3,vertexList_4, color->[0,0,0]);
-      draw3d(vertexList_1,vertexList_4, color->[0,0,0]);
+			draw3d(vertexList_1,vertexList_3, color->[0,0,0]);
 
 		    //draw triangle abc
-			fillpoly3d(vertices, color->[.9,.9,.9]);
+			fillpoly3d([vertices_1,vertices_2,vertices_3], color->[.9,.9,.9]);
         );
 
         //begin applet
@@ -78,9 +67,11 @@
 			background3d([0.9,0.9,0.9]);
 
         //draw triangle abc
-        draw3Dquad(vertices);
+        draw3Dtriangle(vertices);
 
-        //TODO draw cross-section
+        //draw parallel lines
+            draw3Dline(vertices_1,lineSlope); //line thur ab
+            draw3Dline(vertices_3,lineSlope); //parallel thru c
 
 	    //draw tracked controllers
 	        draw3Dxrinputsources(getxrinputsources());
@@ -117,14 +108,15 @@
             );
         );
     </script>
-        <script type="text/javascript">
-            CindyJS({canvasname:"CSCanvas",scripts:"*"});
-        </script>
-        </head>
 
-        <body>
-            <canvas id="Cindy3D" style="border: none;" width="632" height="452"></canvas>
-            <div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
-        </body>
+    <script type="text/javascript">
+        CindyJS({canvasname:"CSCanvas",scripts:"cs*"});
+    </script>
+</head>
 
-    </html>
+<body>
+<canvas id="Cindy3D" style="border: none;" width="632" height="452"></canvas>
+<div id="CSCanvas" style="width:50px; height:50px; border:none"></div>
+</body>
+
+</html>
